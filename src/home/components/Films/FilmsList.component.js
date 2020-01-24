@@ -10,7 +10,7 @@ import Skeleton from "../../../shared/components/skeleton/Skeleton.component";
 const FilmsList = ({ searchedFilm }) => {
   const [loading, setLoading] = useState(true);
 
-  const startWarsFilms = useSelector(state => state.films);
+  const starWarsFilms = useSelector(state => state.films.films);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const FilmsList = ({ searchedFilm }) => {
   };
 
   const updateSelectedFilme = selectedFilmd => {
-    const filmData = startWarsFilms.find(film => {
+    const filmData = starWarsFilms.find(film => {
       return film.episode_id === selectedFilmd.id;
     });
     setSelectedFilme(filmData);
@@ -37,7 +37,7 @@ const FilmsList = ({ searchedFilm }) => {
   };
 
   const filterCard = () =>
-    startWarsFilms.filter(film => {
+    starWarsFilms.filter(film => {
       return film.title.toLowerCase().includes(searchedFilm.toLowerCase());
     });
 
