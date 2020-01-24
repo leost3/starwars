@@ -1,0 +1,21 @@
+.film-list {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &__container {
+        width: 65%;
+        margin: 0 auto;
+
+    }
+
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        transition: all 0.5s ease;
+
+        &.shrink {
+            margin-right: 200px;
+        }
+    }
+}
