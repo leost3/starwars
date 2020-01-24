@@ -1,9 +1,11 @@
 import { FILM_LIST } from "../actions/types";
-
-export default (state = [], action) => {
+const initialState = {
+  films: []
+};
+export default (state = initialState, action) => {
   switch (action.type) {
     case FILM_LIST:
-      return [...state, action.payload];
+      return { ...state, films: action.payload };
     default:
       return state;
   }

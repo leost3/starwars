@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./FilmsList.style.scss";
-import starwars from "../../../shared/apis/starwars.api";
 import { fetchFilmsAction } from "../../../Redux/actions";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import FilmCard from "./FilmCard.component";
 import Panel from "./Panel.component";
 import Skeleton from "../../../shared/components/skeleton/Skeleton.component";
 
-const useFetch = (endpoint, action) => {
-  const [startWarsFilms, setStarwarFilms] = useState([]);
+const FilmsList = ({ searchedFilm }) => {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    (async function fetchData() {
-      const response = await starwars.get(endpoint);
-      // console.log(response.data.results);
-      setStarwarFilms(response.data.results);
-    })();
-    setLoading(false);
-  }, []);
+  const startWarsFilms = useSelector(state => state.films);
+  const dispatch = useDispatch();
 
-  return { startWarsFilms, loading };
-};
-const FilmsList = ({ searchedFilm, fetchFilmsAction }) => {
-  const { startWarsFilms, loading } = useFetch("/", fetchFilmsAction);
+  useEffect(() => {
+    dispatch(fetchFilmsAction());
+    setLoading(false);
+  }, [dispatch]);
 
   const [isPanelSet, setIsPanelSet] = useState(false);
   const [selectedFilm, setSelectedFilme] = useState(null);
@@ -36,8 +28,11 @@ const FilmsList = ({ searchedFilm, fetchFilmsAction }) => {
     setIsPanelSet(boolean);
   };
 
-  const updateSelectedFilme = film => {
-    setSelectedFilme(film);
+  const updateSelectedFilme = selectedFilmd => {
+    const filmData = startWarsFilms.find(film => {
+      return film.episode_id === selectedFilmd.id;
+    });
+    setSelectedFilme(filmData);
     setIsPanelSet(true);
   };
 
@@ -73,8 +68,4 @@ const FilmsList = ({ searchedFilm, fetchFilmsAction }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  starWarsFilmList: state
-});
-
-export default connect(mapStateToProps, { fetchFilmsAction })(FilmsList);
+export default FilmsList;

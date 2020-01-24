@@ -4,15 +4,44 @@
     right: -500px;
     width: 500px;
     height: 100%;
-    background-color: grey;
+    background-color: white;
     transition: all 0.5s ease;
+    border: 1px solid lightgray;
 
     &.toggled {
         right: 0;
     }
 
     &-header {
+        padding: 15px;
         display: flex;
         justify-content: space-between;
+        border-bottom: 1px solid lightgray;
+    }
+
+    &-close-button:hover {
+        cursor: pointer;
+    }
+
+    &-body {
+        width: 100%;
+
+        .image-container {
+            padding: 15px;
+
+            height: auto;
+
+            & img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
+        }
+    }
+
+    .overview {
+        padding: 15px;
+
+        .opening-crawl {}
     }
 }

@@ -10,7 +10,9 @@ const FilmCard = ({
   const isFilmSected = selectedFilm === filmData.title;
 
   const selectFilme = () => {
-    isFilmSected ? alert("gogogog") : updateSelectedFilme(filmData.title);
+    isFilmSected
+      ? alert("gogogog")
+      : updateSelectedFilme({ title: filmData.title, id: filmData.episode_id });
   };
 
   return (
