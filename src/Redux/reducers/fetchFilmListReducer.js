@@ -1,4 +1,4 @@
-import { FILM_LIST } from "../actions/types";
+import { FILM_LIST } from "../types";
 const initialState = {
   films: []
 };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import Searchbar from "../components/Searchbar/Searchbar.component";
+import Searchbar from "../../shared/components/Searchbar/Searchbar.component";
 import FilmsList from "../components/Films/FilmsList.component";
+
 const Home = () => {
   const [searchedFilm, setSearchedFilm] = useState("");
 

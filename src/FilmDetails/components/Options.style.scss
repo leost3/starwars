@@ -1,0 +1,17 @@
+.option {
+    margin-left: 10px;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-family: 'Bowlby One SC', cursive;
+
+
+    &.selected {
+        border-bottom: 3px solid blue;
+
+    }
+
+    &:hover {
+        border-bottom: 3px solid blue;
+    }
+
+}

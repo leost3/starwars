@@ -19,21 +19,9 @@ const FilmsList = ({ searchedFilm }) => {
   }, [dispatch]);
 
   const [isPanelSet, setIsPanelSet] = useState(false);
-  const [selectedFilm, setSelectedFilme] = useState(null);
 
   const togglePanel = boolean => {
-    if (!boolean) {
-      setSelectedFilme(null);
-    }
     setIsPanelSet(boolean);
-  };
-
-  const updateSelectedFilme = selectedFilmd => {
-    const filmData = starWarsFilms.find(film => {
-      return film.episode_id === selectedFilmd.id;
-    });
-    setSelectedFilme(filmData);
-    setIsPanelSet(true);
   };
 
   const filterCard = () =>
@@ -51,19 +39,14 @@ const FilmsList = ({ searchedFilm }) => {
             filterCard().map(film => (
               <FilmCard
                 filmData={film}
-                updateSelectedFilme={updateSelectedFilme}
-                selectedFilm={selectedFilm}
                 key={film.episode_id}
+                togglePanel={togglePanel}
               />
             ))
           )}
         </div>
       </div>
-      <Panel
-        isPanelSet={isPanelSet}
-        togglePanel={togglePanel}
-        selectedFilm={selectedFilm}
-      />
+      <Panel isPanelSet={isPanelSet} togglePanel={togglePanel} />
     </div>
   );
 };

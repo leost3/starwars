@@ -1,0 +1,58 @@
+@import "../../styles/styles.scss";
+
+
+
+$background:steelblue;
+
+.film-details {
+    position: relative;
+    text-align: center;
+
+    .selected-film-title {
+        font-family: 'Bowlby One SC', cursive;
+        font-size: 45px;
+    }
+
+    .results-page {
+
+        width: 60%;
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px auto 0;
+
+        .results-rows {
+            width: 100%;
+            // background: rgba($dark-red, 0.2);
+
+            &:nth-child(odd) {
+                background: $background;
+                // background: rgba($dark-red, 0.2);
+            }
+
+            &:nth-child(even) {
+                background: lightgray;
+                // background: rgba($dark-red, 0.2);
+            }
+
+        }
+
+
+        .results-header {
+            width: 100%;
+            padding: 10px 0;
+            display: flex;
+            font-size: 20px;
+            font-weight: 500;
+            // justify-content: space-between;
+            border-bottom: 1px solid darkgrey;
+            background: $background;
+
+            .header-block {
+                width: calc(100%/8);
+                text-transform: capitalize;
+            }
+        }
+    }
+}

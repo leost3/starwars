@@ -1,0 +1,16 @@
+$backdropindex : 100;
+
+body.backdrop-hook {
+    overflow: hidden;
+}
+
+.backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(#fff, 0.5);
+    overflow: hidden;
+    z-index: $backdropindex;
+}

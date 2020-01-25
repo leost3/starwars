@@ -1,11 +1,19 @@
 import React from "react";
 import "./Panel.style.scss";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
-const Panel = ({ togglePanel, isPanelSet, selectedFilm }) => {
+const Panel = ({ togglePanel, isPanelSet }) => {
+  const selectedFilm = useSelector(state => state.selectedFilm.selectedFilm);
+
+  const hasMovieBeenSelected = _.isEmpty(selectedFilm);
+
   return (
     <div className={`panel ${isPanelSet && "toggled"}`}>
       <div className="panel-header">
-        <span className="title">{selectedFilm ? selectedFilm.title : ""}</span>
+        <span className="title">
+          {!hasMovieBeenSelected ? selectedFilm.title : ""}
+        </span>
         <span onClick={() => togglePanel(false)} className="panel-close-button">
           &#10006;
         </span>
@@ -14,16 +22,26 @@ const Panel = ({ togglePanel, isPanelSet, selectedFilm }) => {
         <div className="image-container">
           <img
             src={require(`../../../images/${
-              selectedFilm ? selectedFilm.title.toLowerCase() : "default"
+              !hasMovieBeenSelected
+                ? selectedFilm.title.toLowerCase()
+                : "default"
             }2.jpg`)}
-            alt={`${selectedFilm ? selectedFilm.title : "default"}`}
+            alt={`${!hasMovieBeenSelected ? selectedFilm.title : "default"}`}
           />
         </div>
         <div className="overview">
           <span className="opening_crawl">
-            {selectedFilm ? selectedFilm.opening_crawl : ""}
+            {!hasMovieBeenSelected ? selectedFilm.opening_crawl : ""}
           </span>
         </div>
+      </div>
+      <div className="panel-footer">
+        <span className="creation">
+          Created at: {!hasMovieBeenSelected ? selectedFilm.created : ""}
+        </span>
+        <span className="release">
+          Release date: {!hasMovieBeenSelected ? selectedFilm.release_date : ""}
+        </span>
       </div>
     </div>
   );
