@@ -5,13 +5,16 @@ import axios from "axios";
 
 import "./FilmDetails.style.scss";
 import Subheader from "../components/Subheader.component";
-import Searchbar from "../../shared/components/Searchbar/Searchbar.component";
 import Characters from "../components/Characters.component";
 import Planets from "../components/Planets.component";
 import Starships from "../components/Starships.component";
 import FilmsList from "../components/FilmsList.component";
 
 import { fetchCharacters } from "../../Redux/actions";
+
+const notAnEndPoint = (object, key) => {
+  return typeof object[key] !== "object" && !object[key].includes("https://");
+};
 
 const FilmDetails = () => {
   const { id, navigateto } = useParams();
@@ -28,10 +31,6 @@ const FilmDetails = () => {
     );
     dispatch(fetchCharacters(charsApiUrlArrayCalls));
   }, [dispatch, id, starWarsFilms, selectedFilme, navigateto]);
-
-  const notAnEndPoint = (object, key) => {
-    return typeof object[key] !== "object" && !object[key].includes("https://");
-  };
 
   let headings = [];
   if (characters.length > 0) {
@@ -83,16 +82,26 @@ const FilmDetails = () => {
       );
     }
     if (navigateto === "planets") {
-      return <Planets data={data} key={i} />;
+      return (
+        <div className="results-rows">
+          <Planets data={data} key={i} />
+        </div>
+      );
     }
 
-    return <Starships data={data} key={i} />;
+    return (
+      <div className="results-rows">
+        <Starships data={data} key={i} />
+      </div>
+    );
   });
 
   return (
     <div className="film-details">
       <Subheader />
-      <h2 className="selected-film-title">{selectedFilme.title.toUpperCase()}</h2>
+      <h2 className="selected-film-title">
+        {selectedFilme.title.toUpperCase()}
+      </h2>
       <div className="results-page">
         <div className="results-header">{renderHeadings}</div>
         {renderRows}
