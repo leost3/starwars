@@ -106,12 +106,12 @@ const FilmDetails: React.FC<Props> = props => {
 
   return (
     <div className="film-details">
-      <Subheader />
       <FilmsList />
       <h2 className="selected-film-title">
         {selectedFilme.title.toUpperCase()}
       </h2>
       <div className="results-page">
+      <Subheader />
         <div className="results-header">{renderHeadings()}</div>
         {renderRows}
       </div>
