@@ -35,14 +35,6 @@ const Panel = ({ togglePanel, isPanelSet }) => {
           </span>
         </div>
       </div>
-      <div className="panel-footer">
-        <span className="creation">
-          Created at: {!hasMovieBeenSelected ? selectedFilm.created : ""}
-        </span>
-        <span className="release">
-          Release date: {!hasMovieBeenSelected ? selectedFilm.release_date : ""}
-        </span>
-      </div>
     </div>
   );
 };

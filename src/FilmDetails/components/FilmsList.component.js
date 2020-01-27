@@ -10,7 +10,7 @@ const FilmList = props => {
   return (
     <div className="list">
       {filmList.map(film => {
-        return <FilmItem film={film} />;
+        return <FilmItem film={film} key={film.episode_id} />;
       })}
     </div>
   );

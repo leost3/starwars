@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -9,6 +9,7 @@ import Characters from "../components/Characters.component";
 import Planets from "../components/Planets.component";
 import Starships from "../components/Starships.component";
 import FilmsList from "../components/FilmsList.component";
+import Loading from "../../shared/UIElements/Loading.component";
 
 import { fetchCharacters } from "../../Redux/actions";
 
@@ -22,6 +23,7 @@ const FilmDetails = () => {
   const dispatch = useDispatch();
   const starWarsFilms = useSelector(state => state.films.films);
   const characters = useSelector(state => state.characters.characters);
+  const isPending = useSelector(state => state.characters.isPending);
   const selectedFilme = useSelector(state => state.selectedFilm.selectedFilm);
 
   useEffect(() => {
@@ -62,18 +64,25 @@ const FilmDetails = () => {
 
   const MAX_HEADINGS = 8;
 
-  const renderHeadings = headings.splice(0, MAX_HEADINGS).map(heading => {
-    if (heading !== "created" && heading !== "edited") {
-      return (
-        <div className="header-block">
-          <span>{heading}</span>
-        </div>
-      );
-    }
-    return null;
-  });
+  const renderHeadings = () => {
+    if (headings.length === 0) return <Loading />;
+
+    return headings.splice(0, MAX_HEADINGS).map(heading => {
+      if (heading !== "created" && heading !== "edited") {
+        return (
+          <div className="header-block">
+            <span>{heading}</span>
+          </div>
+        );
+      }
+    });
+  };
 
   const renderRows = rows.map((data, i) => {
+    if (isPending) {
+      return <h1>Loading..</h1>;
+    }
+
     if (navigateto === "characters") {
       return (
         <div className="results-rows">
@@ -99,14 +108,14 @@ const FilmDetails = () => {
   return (
     <div className="film-details">
       <Subheader />
+      <FilmsList />
       <h2 className="selected-film-title">
         {selectedFilme.title.toUpperCase()}
       </h2>
       <div className="results-page">
-        <div className="results-header">{renderHeadings}</div>
+        <div className="results-header">{renderHeadings()}</div>
         {renderRows}
       </div>
-      <FilmsList />
     </div>
   );
 };

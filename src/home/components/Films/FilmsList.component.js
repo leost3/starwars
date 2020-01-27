@@ -6,16 +6,15 @@ import { useSelector, useDispatch } from "react-redux";
 import FilmCard from "./FilmCard.component";
 import Panel from "./Panel.component";
 import Skeleton from "../../../shared/components/skeleton/Skeleton.component";
+import EmptyState from "../../../shared/UIElements/EmptyState.component";
 
 const FilmsList = ({ searchedFilm }) => {
-  const [loading, setLoading] = useState(true);
-
   const starWarsFilms = useSelector(state => state.films.films);
   const dispatch = useDispatch();
+  const isPending = useSelector(state => state.films.isPending);
 
   useEffect(() => {
     dispatch(fetchFilmsAction());
-    setLoading(false);
   }, [dispatch]);
 
   const [isPanelSet, setIsPanelSet] = useState(false);
@@ -33,8 +32,10 @@ const FilmsList = ({ searchedFilm }) => {
     <div className="film-list">
       <div className="film-list__container">
         <div className={`film-list__content ${isPanelSet && "shrink"}`}>
-          {loading ? (
+          {isPending ? (
             <Skeleton />
+          ) : filterCard().length === 0 ? (
+            <EmptyState />
           ) : (
             filterCard().map(film => (
               <FilmCard

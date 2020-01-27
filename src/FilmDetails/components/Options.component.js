@@ -1,6 +1,6 @@
 import React from "react";
 import "./Options.style.scss";
-import { withRouter, useParams } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Options = ({ updateSelectedOption, selectedOption, option, history }) => {
   const selectedFilm = useSelector(state => state.selectedFilm.selectedFilm);
