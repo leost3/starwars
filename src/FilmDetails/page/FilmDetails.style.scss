@@ -24,16 +24,11 @@ $background:steelblue;
 
         .results-rows {
             width: 100%;
-            // background: rgba($dark-red, 0.2);
 
-            &:nth-child(odd) {
-                background: $background;
-                // background: rgba($dark-red, 0.2);
-            }
+            &:nth-child(odd) {}
 
             &:nth-child(even) {
                 background: lightgray;
-                // background: rgba($dark-red, 0.2);
             }
 
         }
@@ -45,13 +40,18 @@ $background:steelblue;
             display: flex;
             font-size: 20px;
             font-weight: 500;
-            // justify-content: space-between;
+            height: 100px;
             border-bottom: 1px solid darkgrey;
-            background: $background;
+            background: rgb(51, 49, 49);
+            color: white;
+
 
             .header-block {
                 width: calc(100%/8);
                 text-transform: capitalize;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

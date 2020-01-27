@@ -1,7 +1,7 @@
 import React from "react";
 import "./Characters.style.scss";
 
-const Characters = ({ data }) => {
+const Characters: React.FC<{ data: Character }> = ({ data }) => {
   return (
     <div className="result-item">
       <span>{data.name}</span>
@@ -17,3 +17,13 @@ const Characters = ({ data }) => {
 };
 
 export default Characters;
+interface Character {
+  name: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+}

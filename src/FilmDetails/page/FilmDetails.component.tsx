@@ -13,17 +13,18 @@ import Loading from "../../shared/UIElements/Loading.component";
 
 import { fetchCharacters } from "../../Redux/actions";
 
-const notAnEndPoint = (object, key) => {
+const notAnEndPoint = (object: { any }, key: string) => {
   return typeof object[key] !== "object" && !object[key].includes("https://");
 };
 
-const FilmDetails = () => {
+interface Props {}
+
+const FilmDetails: React.FC<Props> = props => {
   const { id, navigateto } = useParams();
 
   const dispatch = useDispatch();
   const starWarsFilms = useSelector(state => state.films.films);
   const characters = useSelector(state => state.characters.characters);
-  const isPending = useSelector(state => state.characters.isPending);
   const selectedFilme = useSelector(state => state.selectedFilm.selectedFilm);
 
   useEffect(() => {
@@ -34,10 +35,10 @@ const FilmDetails = () => {
     dispatch(fetchCharacters(charsApiUrlArrayCalls));
   }, [dispatch, id, starWarsFilms, selectedFilme, navigateto]);
 
-  let headings = [];
+  let headings: string[] = [];
   if (characters.length > 0) {
     const value = characters[0];
-    const filtered = [];
+    const filtered: string[] = [];
     for (const key in value) {
       if (notAnEndPoint(value, key)) {
         filtered.push(key);
@@ -47,16 +48,17 @@ const FilmDetails = () => {
   }
 
   if (headings.length > 0) {
-    headings = headings.map(header =>
+    headings = headings.map((header: string) =>
       header.includes("_") ? header.replace("_", " ") : header
     );
   }
 
-  const rows = characters.map(value => {
+  const rows = characters.map(character => {
     const filtered = {};
-    for (const key in value) {
-      if (notAnEndPoint(value, key)) {
-        filtered[key] = value[key];
+
+    for (const key in character) {
+      if (notAnEndPoint(character, key)) {
+        filtered[key] = character[key];
       }
     }
     return filtered;
@@ -75,14 +77,11 @@ const FilmDetails = () => {
           </div>
         );
       }
+      return null;
     });
   };
 
   const renderRows = rows.map((data, i) => {
-    if (isPending) {
-      return <h1>Loading..</h1>;
-    }
-
     if (navigateto === "characters") {
       return (
         <div className="results-rows">

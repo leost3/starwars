@@ -1,6 +1,7 @@
 import React from "react";
 import "./Leading.style.scss";
 import { Link } from "react-router-dom";
+
 const Leading = props => {
   return (
     <Link to="/">

@@ -3,7 +3,7 @@ const initialState = {
   selectedFilm: {}
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: Action) => {
   switch (action.type) {
     case SELECTED_FILM:
       return { ...state, selectedFilm: action.payload };
@@ -11,3 +11,7 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+export interface Action {
+  type: string;
+  payload: any;
+}

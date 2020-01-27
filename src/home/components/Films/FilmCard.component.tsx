@@ -1,14 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./FilmCard.style.scss";
-import { withRouter } from "react-router-dom";
-
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import {FilmData} from "./FilmsList.component";
 import { selectedFilmAction } from "../../../Redux/actions";
 
-const FilmCard = ({ filmData, togglePanel, history }) => {
+const FilmCard: React.FC<Props> = ({ filmData, togglePanel, history }) => {
   const dispatch = useDispatch();
   const selectedFilm = useSelector(state => state.selectedFilm.selectedFilm);
-
   const isFilmSected = selectedFilm.title === filmData.title;
 
   const selectFilm = e => {
@@ -16,7 +15,7 @@ const FilmCard = ({ filmData, togglePanel, history }) => {
     dispatch(selectedFilmAction(filmData));
   };
 
-  const navigateTo = e => {
+  const navigateTo = (e): void => {
     const navigateTo = e.target.dataset.navigation;
     dispatch(selectedFilmAction(filmData));
     history.push(
@@ -61,3 +60,10 @@ const FilmCard = ({ filmData, togglePanel, history }) => {
 };
 
 export default withRouter(FilmCard);
+
+interface Props {
+  filmData: FilmData;
+  togglePanel: (el: boolean) => void;
+  history: RouteComponentProps;
+}
+

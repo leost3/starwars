@@ -8,7 +8,7 @@ import Panel from "./Panel.component";
 import Skeleton from "../../../shared/components/skeleton/Skeleton.component";
 import EmptyState from "../../../shared/UIElements/EmptyState.component";
 
-const FilmsList = ({ searchedFilm }) => {
+const FilmsList: React.FC<{ searchedFilm: string }> = ({ searchedFilm }) => {
   const starWarsFilms = useSelector(state => state.films.films);
   const dispatch = useDispatch();
   const isPending = useSelector(state => state.films.isPending);
@@ -17,14 +17,14 @@ const FilmsList = ({ searchedFilm }) => {
     dispatch(fetchFilmsAction());
   }, [dispatch]);
 
-  const [isPanelSet, setIsPanelSet] = useState(false);
+  const [isPanelSet, setIsPanelSet] = useState<boolean>(false);
 
-  const togglePanel = boolean => {
-    setIsPanelSet(boolean);
+  const togglePanel = (element: boolean) => {
+    setIsPanelSet(element);
   };
 
   const filterCard = () =>
-    starWarsFilms.filter(film => {
+    starWarsFilms.filter((film: FilmData) => {
       return film.title.toLowerCase().includes(searchedFilm.toLowerCase());
     });
 
@@ -37,7 +37,7 @@ const FilmsList = ({ searchedFilm }) => {
           ) : filterCard().length === 0 ? (
             <EmptyState />
           ) : (
-            filterCard().map(film => (
+            filterCard().map((film: FilmData) => (
               <FilmCard
                 filmData={film}
                 key={film.episode_id}
@@ -53,3 +53,19 @@ const FilmsList = ({ searchedFilm }) => {
 };
 
 export default FilmsList;
+export interface FilmData {
+  title: string;
+  episode_id: number;
+  opening_crawl: string;
+  director: string;
+  producer: string;
+  release_date: string;
+  characters: string[];
+  planets: string[];
+  starships: string[];
+  vehicles: string[];
+  species: string[];
+  created: string;
+  edited: string;
+  url: string;
+}

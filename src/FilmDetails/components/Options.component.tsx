@@ -1,8 +1,14 @@
 import React from "react";
 import "./Options.style.scss";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-const Options = ({ updateSelectedOption, selectedOption, option, history }) => {
+
+const Options: React.FC<Props> = ({
+  updateSelectedOption,
+  selectedOption,
+  option,
+  history
+}) => {
   const selectedFilm = useSelector(state => state.selectedFilm.selectedFilm);
 
   const isThisOptionSelected = selectedOption === option;
@@ -25,3 +31,9 @@ const Options = ({ updateSelectedOption, selectedOption, option, history }) => {
 };
 
 export default withRouter(Options);
+interface Props {
+  updateSelectedOption: (string) => void;
+  selectedOption: string;
+  option: string;
+  history: RouteComponentProps;
+}

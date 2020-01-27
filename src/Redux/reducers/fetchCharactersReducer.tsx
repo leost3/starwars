@@ -3,17 +3,20 @@ import {
   REQUEST_CHARACTERS_PENDING,
   REQUEST_CHARACTERS_FAIL
 } from "../types";
+
+import { Action } from "./selectFilmReducer";
+
 const initialState = {
   isPending: true,
   characters: []
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: Action) => {
   switch (action.type) {
     case REQUEST_CHARACTERS_PENDING:
       return { ...state, isPending: true };
     case REQUEST_CHARACTERS_SUCCESS:
-      return { ...state, characters: action.payload,isPending: false };
+      return { ...state, characters: action.payload, isPending: false };
     case REQUEST_CHARACTERS_FAIL:
       return { ...state, error: action.payload };
     default:

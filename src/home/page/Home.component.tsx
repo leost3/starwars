@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 import Searchbar from "../../shared/components/Searchbar/Searchbar.component";
 import FilmsList from "../components/Films/FilmsList.component";
+interface Props {}
 
-const Home = () => {
-  const [searchedFilm, setSearchedFilm] = useState("");
+const Home: React.FC<Props> = props => {
+  const [searchedFilm, setSearchedFilm] = useState<string>("");
 
-  const updateSearchedFilm = term => setSearchedFilm(term);
+  const updateSearchedFilm = (term: string) => setSearchedFilm(term);
 
   return (
     <div className="home">

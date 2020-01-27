@@ -3,13 +3,14 @@ import {
   FETCH_FILM_PENDING,
   FETCH_FILM_LIST_FAIL
 } from "../types";
+import { Action } from "./selectFilmReducer";
 
 const initialState = {
   isPending: true,
   films: []
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: Action) => {
   switch (action.type) {
     case FETCH_FILM_PENDING:
       return { ...state, isPending: true };

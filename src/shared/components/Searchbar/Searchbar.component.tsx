@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./Searchbar.style.scss";
-const Searchbar = ({ updateSearchedFilm }) => {
-  const [term, setTerm] = useState("");
 
-  const onChangeHandler = e => {
+interface Props {
+  updateSearchedFilm: (string) => void;
+}
+
+const Searchbar: React.FC<Props> = ({ updateSearchedFilm }) => {
+  const [term, setTerm] = useState<string>("");
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setTerm(term);
     updateSearchedFilm(term);

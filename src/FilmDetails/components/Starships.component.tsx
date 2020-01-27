@@ -1,7 +1,7 @@
 import React from "react";
 import "./Starships.style.scss";
 
-const Starships = ({ data }) => {
+const Starships: React.FC<{ data: StarShip }> = ({ data }) => {
   return (
     <div className="result-item">
       <span>{data.name}</span>
@@ -17,3 +17,20 @@ const Starships = ({ data }) => {
 };
 
 export default Starships;
+interface StarShip {
+  name: string;
+  model: string;
+  manufacturer: string;
+  cost_in_credits: string;
+  length: string;
+  max_atmosphering_speed: string;
+  crew: string;
+  passengers: string;
+  cargo_capacity: string;
+  consumables: string;
+  hyperdrive_rating: string;
+  MGTL: string;
+  starship_class: string;
+  created: string;
+  edited: string;
+}

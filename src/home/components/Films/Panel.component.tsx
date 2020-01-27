@@ -3,7 +3,7 @@ import "./Panel.style.scss";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 
-const Panel = ({ togglePanel, isPanelSet }) => {
+const Panel: React.FC<Props> = ({ togglePanel, isPanelSet }) => {
   const selectedFilm = useSelector(state => state.selectedFilm.selectedFilm);
 
   const hasMovieBeenSelected = _.isEmpty(selectedFilm);
@@ -40,3 +40,7 @@ const Panel = ({ togglePanel, isPanelSet }) => {
 };
 
 export default Panel;
+interface Props {
+  togglePanel: (boolean) => void;
+  isPanelSet: boolean;
+}
