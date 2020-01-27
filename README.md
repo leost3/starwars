@@ -6,6 +6,8 @@
 
 ## Installation
 
+Clone or download the repo
+
 Download all the dependencies
 
 ```sh
